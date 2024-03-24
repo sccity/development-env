@@ -44,6 +44,7 @@ RUN chmod +x /app/entrypoint.sh
 USER sccity
 
 RUN set -eo pipefail \
+    && export PATH=/home/sccity/.local/bin:$PATH \
     && pip3 install jupyterlab \
     && jupyter-lab --generate-config \
     && expect -c 'spawn jupyter-lab password; expect "Enter password:"; send "sccity\r"; expect "Verify password:"; send "sccity\r"; expect eof' \
