@@ -16,7 +16,7 @@ RUN set -e \
     && apt-get -y install --no-install-recommends --no-install-suggests \
     apt-transport-https apt-utils ca-certificates curl gdebi-core gnupg2 systemd \
     libapparmor1 libclang-dev libedit2 libpq5 libssl3 libssl-dev lsb-release \
-    build-essential libffi-dev python3-dev python3 python3-pip python3-venv \
+    build-essential libffi-dev python3-dev python3 python3-pip python3-venv expect \
     psmisc r-base sudo \
     && apt-get -y autoremove \
     && apt-get clean \
@@ -30,9 +30,6 @@ RUN set -eo pipefail \
 RUN set -eo pipefail \
     && ln -s /dev/stdout /var/log/syslog \
     && echo "r-cran-repos=${CRAN_URL}" >> /etc/rstudio/rsession.conf
-    
-RUN set -eo pipefail \
-    && curl -L https://coder.com/install.sh | sh
 
 RUN set -eo pipefail \
       && groupadd $GROUPNAME \
@@ -44,5 +41,10 @@ COPY entrypoint.sh /app
 RUN chown -R "$USER":"$GROUPNAME" /app && chmod -R 775 /app
 RUN chmod +x /app/entrypoint.sh
 
-EXPOSE 3000 8787
+RUN set -eo pipefail \
+    && pip3 install jupyterlab \
+    && jupyter-lab --generate-config \
+    && expect -c 'spawn jupyter-lab password; expect "Enter password:"; send "sccity\r"; expect "Verify password:"; send "sccity\r"; expect eof'
+    
+EXPOSE 8787 8888
 ENTRYPOINT ["/app/entrypoint.sh"]

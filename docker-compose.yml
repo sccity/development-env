@@ -11,8 +11,8 @@ services:
     environment:
       - TZ=America/Denver
     ports:
-      - 8000:3000
-      - 8001:8787
+      - 8000:8787
+      - 8001:8888
     privileged: true
     restart: unless-stopped
     
