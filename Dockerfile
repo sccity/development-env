@@ -45,7 +45,9 @@ RUN set -eo pipefail \
     && pip3 install jupyterlab \
     && jupyter-lab --generate-config \
     && expect -c 'spawn jupyter-lab password; expect "Enter password:"; send "sccity\r"; expect "Verify password:"; send "sccity\r"; expect eof' \
-    && pip3 install --upgrade jupyterlab jupyterlab-git
+    && pip3 install --upgrade jupyterlab jupyterlab-git \
+    && cp -fR /root/.jupyter /home/$USER/.jupyter \
+    && chown -R "$USER":"$GROUPNAME" /home/$USER/.jupyter
     
 EXPOSE 8787 8888
 ENTRYPOINT ["/app/entrypoint.sh"]
