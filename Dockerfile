@@ -17,6 +17,7 @@ RUN set -e \
     apt-transport-https apt-utils ca-certificates curl gdebi-core gnupg2 systemd \
     libapparmor1 libclang-dev libedit2 libpq5 libssl3 libssl-dev lsb-release \
     build-essential libffi-dev python3-dev python3 python3-pip python3-venv git-all \
+    libcurl4-openssl-dev \
     psmisc r-base sudo \
     && apt-get -y autoremove \
     && apt-get clean \
