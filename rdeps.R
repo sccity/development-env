@@ -1,0 +1,7 @@
+install.packages("devtools")
+devtools::install_github("IRkernel/IRkernel")
+IRkernel::installspec()
+install.packages("DBI", "RMySQL", "XLConnect", "xlsx")
+install.packages("tidyverse", "dplyr", "tidyr", "stringr", "formatR")
+install.packages("lubridate", "ggplot2", "tidymodels", "repr")
+install.packages("caret", "ggmap", "zoo", "xts", "quantmod", "jsonlite", "httr")
