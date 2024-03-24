@@ -41,13 +41,15 @@ COPY entrypoint.sh /app
 RUN chown -R "$USER":"$GROUPNAME" /app && chmod -R 775 /app
 RUN chmod +x /app/entrypoint.sh
 
+USER sccity
+
 RUN set -eo pipefail \
     && pip3 install jupyterlab \
     && jupyter-lab --generate-config \
     && expect -c 'spawn jupyter-lab password; expect "Enter password:"; send "sccity\r"; expect "Verify password:"; send "sccity\r"; expect eof' \
-    && pip3 install --upgrade jupyterlab jupyterlab-git \
-    && cp -fR /root/.jupyter /home/$USER/.jupyter \
-    && chown -R "$USER":"$GROUPNAME" /home/$USER/.jupyter
+    && pip3 install --upgrade jupyterlab jupyterlab-git
     
+USER root
+
 EXPOSE 8787 8888
 ENTRYPOINT ["/app/entrypoint.sh"]
