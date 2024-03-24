@@ -1,0 +1,21 @@
+version: '3'
+services:
+  development-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sccity/development-env:prod
+    volumes:
+      - dev-env-home:/home
+    container_name: development-env
+    environment:
+      - TZ=America/Denver
+    ports:
+      - 127.0.0.1:8000:3000
+      - 127.0.0.1:8001:8787
+    privileged: true
+    restart: unless-stopped
+    
+volumes:
+  dev-env-home:
+    driver: local
