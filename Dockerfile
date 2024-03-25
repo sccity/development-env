@@ -18,6 +18,7 @@ RUN set -eo pipefail \
 WORKDIR /app
 COPY entrypoint.sh /app
 COPY rdeps.R /app
+COPY rkernel.R /app
 COPY IRkernel.R /app
 COPY jupyter_server_config.json /app
 RUN chown -R "$USER":"$GROUPNAME" /app && chmod -R 775 /app
