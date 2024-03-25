@@ -32,9 +32,33 @@ RUN set -e \
     libapparmor1 libclang-dev libedit2 libpq5 libssl3 libssl-dev lsb-release expect \
     build-essential libffi-dev python3-dev python3 python3-pip python3-venv git-all \
     libcurl4-openssl-dev psmisc r-base sudo libbz2-dev liblzma-dev nano libxml2-dev \
+    libsodium-dev libprotobuf-dev libudunits2-dev libjq-dev gfortran libgdal-dev \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+    
+RUN set -e \
+    && apt-get -y update \
+    && apt-get -y dist-upgrade \
+    && apt-get -y install --no-install-recommends --no-install-suggests \
+    r-cran-rgdal gdal-bin
+    
+USER sccity
+
+RUN set -eo pipefail \
+    && export PATH=/home/sccity/.local/bin:$PATH \
+    && /usr/bin/pip3 install jupyterlab \
+    && /usr/bin/pip3 install jupyterlab-git \
+    && /usr/bin/pip3 install jupyterlab-code-formatter \
+    && /usr/bin/pip3 install jupyterlab-lsp \
+    && /usr/bin/pip3 install jupyterlab-drawio \
+    && /usr/bin/pip3 install lckr_jupyterlab_variableinspector \
+    && /usr/bin/pip3 install black \
+    && /usr/bin/pip3 install isort \
+    && /usr/bin/pip3 install jupyterlab_sql \
+    && /usr/bin/pip3 install jupyterlab-amphi
+    
+USER root
     
 RUN set -eo pipefail \
     && /usr/bin/Rscript /app/rdeps.R
@@ -48,25 +72,19 @@ RUN set -eo pipefail \
     && ln -s /dev/stdout /var/log/syslog \
     && echo "r-cran-repos=${CRAN_URL}" >> /etc/rstudio/rsession.conf
 
-USER sccity
-
-RUN set -eo pipefail \
-    && export PATH=/home/sccity/.local/bin:$PATH \
-    && /usr/bin/pip3 install jupyterlab jupyterlab-git jupyterlab-code-formatter jupyterlab-lsp jupyterlab-drawio \
-    && /usr/bin/pip3 install lckr_jupyterlab_variableinspector black isort jupyterlab_sql jupyterlab-amphi  \
-    && /usr/bin/pip3 install jupyterlab-spreadsheet-editor jupyterlab-executor
-
-USER root
-
 RUN set -e \
     && apt-get -y update \
     && apt-get -y install --no-install-recommends --no-install-suggests \
-    libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev \
-    && apt-get -y autoremove \ 
-    && apt-get clean
+    libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
     
 RUN set -eo pipefail \
     && /usr/bin/Rscript /app/rkernel.R
+    
+RUN set -e \
+    && apt-get -y update \
+    && apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
     
 USER sccity
 
