@@ -52,8 +52,8 @@ USER sccity
 
 RUN set -eo pipefail \
     && export PATH=/home/sccity/.local/bin:$PATH \
-    && /usr/bin/pip3 install jupyterlab jupyterlab-git jupyterlab-code-formatter jupyterlab-lsp jupyterlab-github \
-    && /usr/bin/pip3 install lckr_jupyterlab_variableinspector black isort jupyterlab_sql jupyterlab-amphi jupyterlab-drawio \
+    && /usr/bin/pip3 install jupyterlab jupyterlab-git jupyterlab-code-formatter jupyterlab-lsp jupyterlab-drawio \
+    && /usr/bin/pip3 install lckr_jupyterlab_variableinspector black isort jupyterlab_sql jupyterlab-amphi  \
     && /usr/bin/pip3 install jupyterlab-spreadsheet-editor jupyterlab-executor
 
 USER root
