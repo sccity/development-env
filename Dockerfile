@@ -18,6 +18,7 @@ RUN set -eo pipefail \
 WORKDIR /app
 COPY entrypoint.sh /app
 COPY rdeps.R /app
+COPY IRkernel.R /app
 COPY jupyter_server_config.json /app
 RUN chown -R "$USER":"$GROUPNAME" /app && chmod -R 775 /app
 RUN chmod +x /app/entrypoint.sh
@@ -51,8 +52,27 @@ USER sccity
 RUN set -eo pipefail \
     && export PATH=/home/sccity/.local/bin:$PATH \
     && /usr/bin/pip3 install jupyterlab jupyterlab-git jupyterlab-code-formatter jupyterlab-lsp jupyterlab-github \
-    && /usr/bin/pip3 install lckr_jupyterlab_variableinspector black isort jupyterlab_sql
+    && /usr/bin/pip3 install lckr_jupyterlab_variableinspector black isort jupyterlab_sql jupyterlab-amphi jupyterlab-drawio \
+    && /usr/bin/pip3 install jupyterlab-spreadsheet-editor jupyterlab-executor
 
+USER root
+
+RUN set -e \
+    && apt-get -y update \
+    && apt-get -y install --no-install-recommends --no-install-suggests \
+    libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev \
+    && apt-get -y autoremove \ 
+    && apt-get clean
+    
+RUN set -eo pipefail \
+    && /usr/bin/Rscript /app/rkernel.R
+    
+USER sccity
+
+RUN set -eo pipefail \
+    && export PATH=/home/sccity/.local/bin:$PATH \
+    && /usr/bin/Rscript /app/IRkernel.R
+    
 USER root
 
 EXPOSE 8787 8888
