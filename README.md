@@ -85,3 +85,6 @@ leaflet
 htmlwidgets
 forecast
 webshot
+languageserver
+geojsonio
+mapview
