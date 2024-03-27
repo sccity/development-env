@@ -18,73 +18,73 @@ docker run -d -p 8000:8787 -p 8001:8888 --name development-env --restart=unless-
 ```
 
 ## Access R Studio and JupyterLab
-Username & Password is sccity
-R Studio: http://localhost:8000
+Username & Password is sccity \
+R Studio: http://localhost:8000 \
 JupyterLab: http://localhost:8001
 
 ## Python Packages
-click
-lxml
-PyMySQL
-PyYAML
-requests
-xmltodict
-python-dotenv
-cachetools
-Flask
-Flask_RESTful
-waitress
-Werkzeug
-flask_swagger_ui
-sqlalchemy
-bs4
-ratelimit
-numpy
-scipy
+click \
+lxml \
+PyMySQL \
+PyYAML \
+requests \
+xmltodict \
+python-dotenv \
+cachetools \
+Flask \
+Flask_RESTful \
+waitress \
+Werkzeug \
+flask_swagger_ui \
+sqlalchemy \
+bs4 \
+ratelimit \
+numpy \
+scipy \
 pandas
 
 ## R Packages
-DBI
-RMySQL
-XLConnect
-xlsx
-tidyverse
-dplyr
-tidyr
-stringr
-formatR
-lubridate
-ggplot2
-tidymodels
-repr
-caret
-ggmap
-zoo
-xts
-quantmod
-jsonlite
-httr
-ggrepel
-sqldf
-xml2
-XML
-xml2
-safer
-stringr
-protolite
-sf
-geojsonio
-scales
-broom
-viridis
-sp
-tidyr
-tigris
-mapview
-leaflet
-htmlwidgets
-forecast
-webshot
-languageserver
-geojsonio
+DBI \
+RMySQL \
+XLConnect \
+xlsx \
+tidyverse \
+dplyr \
+tidyr \
+stringr \
+formatR \
+lubridate \
+ggplot2 \
+tidymodels \
+repr \
+caret \
+ggmap \
+zoo \
+xts \
+quantmod \
+jsonlite \
+httr \
+ggrepel \
+sqldf \
+xml2 \
+XML \
+xml2 \
+safer \
+stringr \
+protolite \
+sf \
+geojsonio \
+scales \
+broom \
+viridis \
+sp \
+tidyr \
+tigris \
+mapview \
+leaflet \
+htmlwidgets \
+forecast \
+webshot \
+languageserver \
+geojsonio \
 mapview
