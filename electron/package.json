@@ -1,0 +1,33 @@
+{
+  "name": "development-env",
+  "version": "0.1.0",
+  "description": "Development Environment",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder -wl"
+  },
+  "build": {
+    "appId": "com.sccity.development-env",
+    "productName": "Development Environment",
+    "copyright": "Santa Clara City (UT)",
+    "dmg": {
+      "title": "Development Environment"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS"
+    }
+  },
+  "author": "Lance Haynie",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^25.3.1",
+    "electron-builder": "^22.14.13"
+  }
+}
