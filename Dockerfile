@@ -20,7 +20,6 @@ COPY entrypoint.sh /app
 COPY rdeps.R /app
 COPY rkernel.R /app
 COPY IRkernel.R /app
-COPY jupyter_server_config.json /app
 RUN chown -R "$USER":"$GROUPNAME" /app && chmod -R 775 /app && chmod +x /app/entrypoint.sh
 
 RUN set -e \
@@ -64,6 +63,9 @@ RUN set -e \
                   gfortran \
                   libgdal-dev \
                   htop \
+                  pandoc \
+                  avahi-daemon \
+                  avahi-utils \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -129,5 +131,5 @@ RUN set -eo pipefail \
     
 USER root
 
-EXPOSE 8787 8888
+EXPOSE 5353 8787 8888
 ENTRYPOINT ["/app/entrypoint.sh"]

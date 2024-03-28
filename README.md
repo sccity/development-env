@@ -14,11 +14,10 @@ Type CMD and hit enter
 
 Run this command:
 ```
-docker run -d -p 8000:8787 -p 8001:8888 --name development-env --restart=unless-stopped --mount source=dev-env-home,target=/home sccity/development-env:beta
+docker run -d -p 8000:8787 -p 8001:8888 --name development-env --restart=unless-stopped --mount source=dev-env-home,target=/home sccity/development-env:latest
 ```
 
 ## Access R Studio and JupyterLab
-Username & Password is sccity \
 R Studio: http://localhost:8000 \
 JupyterLab: http://localhost:8001
 
